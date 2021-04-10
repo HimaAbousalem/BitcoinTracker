@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BitcoinTracker</string>
+    <string name="dollar_currency">$</string>
+    <string name="eur_currency">€</string>
+    <string name="gbp_currency">£</string>
+    <string name="today">Today</string>
+    <string name="us_dollar">US Dollar</string>
+    <string name="british_pound">British Pound</string>
+    <string name="euro">Euro</string>
+    <string name="retry">Retry</string>
 </resources>

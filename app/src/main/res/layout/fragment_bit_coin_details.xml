@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".features.details_screen.BitCoinDetailsFragment">
+
+    <TextView
+        android:id="@+id/dollarText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/us_dollar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTV" />
+
+    <TextView
+        android:id="@+id/gbpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/british_pound"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/euroText"
+        app:layout_constraintTop_toBottomOf="@+id/euroText" />
+
+    <TextView
+        android:id="@+id/euroText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/euro"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/dollarText"
+        app:layout_constraintTop_toBottomOf="@+id/dollarText" />
+
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/dollarCurrencySymbol"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="@+id/dollarText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dollarCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/dollarText"
+        app:layout_constraintEnd_toStartOf="@+id/dollarCurrencySymbol"
+        app:layout_constraintTop_toTopOf="@+id/dollarText" />
+
+    <TextView
+        android:id="@+id/euroCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/euroText"
+        app:layout_constraintEnd_toStartOf="@+id/euroCurrencySymbol"
+        app:layout_constraintTop_toTopOf="@+id/euroText" />
+
+    <TextView
+        android:id="@+id/gbpCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gbpText"
+        app:layout_constraintEnd_toStartOf="@+id/gbpCurrencySymbol"
+        app:layout_constraintTop_toTopOf="@+id/gbpText" />
+
+    <TextView
+        android:id="@+id/dollarCurrencySymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="@string/dollar_currency"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/dollarCurrency"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dollarCurrency" />
+
+    <TextView
+        android:id="@+id/euroCurrencySymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/eur_currency"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/euroCurrency"
+        app:layout_constraintEnd_toEndOf="@+id/dollarCurrencySymbol"
+        app:layout_constraintTop_toTopOf="@+id/euroCurrency" />
+
+    <TextView
+        android:id="@+id/gbpCurrencySymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gbp_currency"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gbpCurrency"
+        app:layout_constraintEnd_toEndOf="@+id/euroCurrencySymbol"
+        app:layout_constraintTop_toTopOf="@+id/gbpCurrency" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
