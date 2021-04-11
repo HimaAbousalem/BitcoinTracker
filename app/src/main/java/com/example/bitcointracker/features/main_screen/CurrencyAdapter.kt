@@ -7,8 +7,9 @@ import com.example.bitcointracker.R
 import com.example.bitcointracker.databinding.RecyclerRowBinding
 import com.example.bitcointracker.model.entities.Currency
 import com.example.bitcointracker.model.entities.CurrencyType
+import com.example.bitcointracker.model.entities.PopulateData
 
-class CurrencyAdapter(private var data: List<List<Currency>>, val listener: DataTransfer) :
+class CurrencyAdapter(private var data: List<PopulateData>, val listener: DataTransfer) :
     RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
@@ -26,14 +27,14 @@ class CurrencyAdapter(private var data: List<List<Currency>>, val listener: Data
             holder.binding.date.text = holder.itemView.context.getString(R.string.today)
         else
             holder.binding.date.text =
-                data[position].first { it.currencyType == CurrencyType.EUR }.date
+                data[position].currencies.first { it.currencyType == CurrencyType.EUR }.date
         holder.binding.currencyRate.text =
-            data[position].first { it.currencyType == CurrencyType.EUR }.rate.toString()
+            data[position].currencies.first { it.currencyType == CurrencyType.EUR }.rate.toString()
     }
 
     override fun getItemCount(): Int = data.size
 
-    fun setData(newData: List<List<Currency>>) {
+    fun setData(newData: List<PopulateData>) {
         data = newData
         notifyDataSetChanged()
     }
@@ -49,5 +50,5 @@ class CurrencyAdapter(private var data: List<List<Currency>>, val listener: Data
 }
 
 interface DataTransfer {
-    fun onItemClick(data: List<Currency>)
+    fun onItemClick(data: PopulateData)
 }

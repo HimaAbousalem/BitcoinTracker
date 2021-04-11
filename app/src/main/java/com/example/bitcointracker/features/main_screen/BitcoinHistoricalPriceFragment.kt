@@ -12,10 +12,7 @@ import com.example.bitcointracker.R
 import com.example.bitcointracker.databinding.FragmentBitcoinHistoricalPriceBinding
 import com.example.bitcointracker.features.SharedViewModel
 import com.example.bitcointracker.features.details_screen.BitCoinDetailsFragment
-import com.example.bitcointracker.model.entities.Currency
-import com.example.bitcointracker.model.entities.Error
-import com.example.bitcointracker.model.entities.Loading
-import com.example.bitcointracker.model.entities.Success
+import com.example.bitcointracker.model.entities.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,7 +53,7 @@ class BitcoinHistoricalPriceFragment : Fragment(), DataTransfer {
                     noInternetVisibility = View.GONE
                 )
                 is Success -> {
-                    currencyAdapter.setData(response.data.days.values.toList())
+                    currencyAdapter.setData(response.data)
                     handleViewState(
                         progressVisibility = View.GONE,
                         recyclerVisibility = View.VISIBLE,
@@ -84,7 +81,7 @@ class BitcoinHistoricalPriceFragment : Fragment(), DataTransfer {
         }
     }
 
-    override fun onItemClick(data: List<Currency>) {
+    override fun onItemClick(data: PopulateData) {
         sharedViewModel.setData(data)
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.container, BitCoinDetailsFragment()).addToBackStack(null).commit()

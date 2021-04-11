@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitcointracker.databinding.FragmentBitCoinDetailsBinding
 import com.example.bitcointracker.features.SharedViewModel
+import com.example.bitcointracker.model.entities.CurrencyType
 
 class BitCoinDetailsFragment : Fragment() {
     lateinit var binding: FragmentBitCoinDetailsBinding
@@ -23,11 +24,11 @@ class BitCoinDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
-        viewModel.bitCoinPriceDetails.observe(viewLifecycleOwner, { currencies ->
-            binding.dateTV.text = currencies.first().date
-            binding.dollarCurrency.text = currencies[0].rate.toString()
-            binding.euroCurrency.text = currencies[1].rate.toString()
-            binding.gbpCurrency.text = currencies[2].rate.toString()
+        viewModel.bitCoinPriceDetails.observe(viewLifecycleOwner, { data ->
+            binding.dateTV.text = data.currencies.first().date
+            binding.dollarCurrency.text = data.currencies.first { it.currencyType == CurrencyType.USD }.rate.toString()
+            binding.euroCurrency.text = data.currencies.first { it.currencyType == CurrencyType.EUR }.rate.toString()
+            binding.gbpCurrency.text = data.currencies.first { it.currencyType == CurrencyType.GBP }.rate.toString()
         })
     }
 }
