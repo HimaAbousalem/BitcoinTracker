@@ -6,6 +6,7 @@ import com.example.bitcointracker.model.entities.Currency
 import com.example.bitcointracker.model.network.BitcoinApi
 import com.example.bitcointracker.util.TWO_WEEKS_AGO
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,40 +23,36 @@ class BitcoinRepo @Inject constructor(
         return if (dao.getTodayRow()?.date == getFormattedDate(System.currentTimeMillis())) {
             dao.getAllData()
         } else {
-            deleteAllFromDatabase()
+            dao.deleteAll()
             val data = retrieveDataFromApi()
             dao.insertAll(data)
             data
         }
     }
 
-    private suspend fun deleteAllFromDatabase() {
-        dao.deleteAll()
-    }
-
     private suspend fun retrieveDataFromApi(): List<PopulateData> {
         val populateDataList = mutableListOf<PopulateData>()
         return withContext(Dispatchers.IO) {
 
-            val currentDay = api.getCurrentDayPrice()
+            val currentDay = async { api.getCurrentDayPrice() }
 
-            val historicalUSD = getHistoricalData("USD")
-            val historicalEUR = getHistoricalData("EUR")
-            val historicalGBP = getHistoricalData("GBP")
+            val historicalUSD = async { getHistoricalData("USD") }
+            val historicalEUR = async { getHistoricalData("EUR") }
+            val historicalGBP = async { getHistoricalData("GBP") }
 
-            fillCurrentDayData(currentDay, populateDataList)
+            fillCurrentDayData(currentDay.await(), populateDataList)
             fillHistorical(
-                historicalEUR,
+                historicalEUR.await(),
                 CurrencyType["EUR"],
                 populateDataList
             )
             fillHistorical(
-                historicalUSD,
+                historicalUSD.await(),
                 CurrencyType["USD"],
                 populateDataList
             )
             fillHistorical(
-                historicalGBP,
+                historicalGBP.await(),
                 CurrencyType["GBP"],
                 populateDataList
             )
